@@ -124,6 +124,7 @@ ShopFire/
 After initializing the database, you can access the admin panel with:
 - Email: admin@shopfire.com
 - Password: Admin123!
+- Admin-Panel: https://webshop-5665.web.app/admin.html
 
 ## Customization
 
