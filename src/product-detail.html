@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopFire - Product Detail</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>ShopFire</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="#" id="cart-icon"><span id="cart-count">0</span> Cart</a></li>
+                    <li><a href="#" id="account-link">Account</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="product-detail">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> &gt; 
+                <a href="products.html">Products</a> &gt; 
+                <span id="product-breadcrumb-name">Product Name</span>
+            </div>
+            
+            <div class="product-detail-container">
+                <div class="product-image">
+                    <img id="product-detail-image" src="" alt="Product Image">
+                </div>
+                
+                <div class="product-info">
+                    <h1 id="product-detail-name">Product Name</h1>
+                    <div class="product-meta">
+                        <p>Category: <span id="product-detail-category">Category</span></p>
+                    </div>
+                    <div class="product-price">
+                        <h2>$<span id="product-detail-price">0.00</span></h2>
+                    </div>
+                    <div class="product-description">
+                        <h3>Description</h3>
+                        <p id="product-detail-description">Product description will be loaded here.</p>
+                    </div>
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button id="decrease-quantity">-</button>
+                            <input type="number" id="product-quantity" value="1" min="1" max="99">
+                            <button id="increase-quantity">+</button>
+                        </div>
+                        <button id="add-to-cart" class="btn">Add to Cart</button>
+                        <button id="buy-now" class="btn btn-secondary">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="related-products">
+                <h2>Related Products</h2>
+                <div class="product-grid" id="related-products-grid">
+                    <!-- Related products will be loaded dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ShopFire</h3>
+                    <p>Your one-stop shop for premium products</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <p>Email: info@shopfire.com</p>
+                    <p>Phone: +1 234 567 890</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ShopFire. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <!-- Cart items will be loaded dynamically -->
+            </div>
+            <div class="cart-total">
+                <h3>Total: <span id="cart-total-price">$0.00</span></h3>
+                <button id="checkout-btn" class="btn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-storage-compat.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/firebase-init.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/product-detail.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

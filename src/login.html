@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopFire - Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="logo">
+            <h1>ShopFire</h1>
+        </div>
+        
+        <div class="auth-tabs">
+            <button class="tab-btn active" id="login-tab">Login</button>
+            <button class="tab-btn" id="register-tab">Register</button>
+        </div>
+
+        <div class="auth-form" id="login-form">
+            <h2>Login to your account</h2>
+            <form id="login-form-element">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-full">Login</button>
+                </div>
+                <p class="error-message" id="login-error"></p>
+            </form>
+        </div>
+
+        <div class="auth-form hidden" id="register-form">
+            <h2>Create a new account</h2>
+            <form id="register-form-element">
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm-password">Confirm Password</label>
+                    <input type="password" id="register-confirm-password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-full">Register</button>
+                </div>
+                <p class="error-message" id="register-error"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/firebase-init.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Check if Firebase Authentication is properly configured
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add a global error handler
+            const loginError = document.getElementById('login-error');
+            
+            // Check if Firebase is properly initialized
+            if (!window.db || !window.auth) {
+                if (loginError) {
+                    loginError.textContent = 'Firebase is not properly initialized. Please check the console for errors.';
+                    loginError.classList.remove('hidden');
+                }
+                
+                // Disable login/register buttons
+                const buttons = document.querySelectorAll('button[type="submit"]');
+                buttons.forEach(button => {
+                    button.disabled = true;
+                });
+                return;
+            }
+            
+            // Test Firebase Authentication configuration
+            auth.signOut().then(() => {
+                console.log('Firebase Authentication is properly configured.');
+            }).catch(error => {
+                console.error('Firebase Authentication error:', error);
+                
+                if (error.code === 'auth/configuration-not-found') {
+                    if (loginError) {
+                        loginError.textContent = 'Firebase Authentication is not properly configured. Please make sure Authentication is enabled in your Firebase console.';
+                        loginError.classList.remove('hidden');
+                    }
+                    
+                    // Disable login/register buttons
+                    const buttons = document.querySelectorAll('button[type="submit"]');
+                    buttons.forEach(button => {
+                        button.disabled = true;
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

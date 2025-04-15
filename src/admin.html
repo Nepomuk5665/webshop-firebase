@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopFire - Admin Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>ShopFire Admin</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Store Front</a></li>
+                    <li><a href="#" id="admin-logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <div class="admin-sidebar">
+            <ul>
+                <li><a href="#" class="active" data-tab="dashboard">Dashboard</a></li>
+                <li><a href="#" data-tab="products">Products</a></li>
+                <li><a href="#" data-tab="categories">Categories</a></li>
+                <li><a href="#" data-tab="orders">Orders</a></li>
+                <li><a href="#" data-tab="users">Users</a></li>
+                <li><a href="#" data-tab="newsletter">Newsletter</a></li>
+                <li><a href="#" data-tab="messages">Messages</a></li>
+            </ul>
+        </div>
+        
+        <div class="admin-content">
+            <!-- Dashboard Tab -->
+            <div class="admin-tab" id="dashboard-tab">
+                <h2>Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Products</h3>
+                        <p id="total-products">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Orders</h3>
+                        <p id="total-orders">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <p id="total-users">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Revenue</h3>
+                        <p id="total-revenue">$0.00</p>
+                    </div>
+                </div>
+                
+                <div class="recent-orders">
+                    <h3>Recent Orders</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recent-orders-table">
+                            <!-- Recent orders will be loaded dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Products Tab -->
+            <div class="admin-tab hidden" id="products-tab">
+                <div class="tab-header">
+                    <h2>Products</h2>
+                    <button id="add-product-btn" class="btn">Add New Product</button>
+                </div>
+                
+                <div class="product-search">
+                    <input type="text" id="product-search" placeholder="Search products...">
+                    <select id="product-category-filter">
+                        <option value="">All Categories</option>
+                        <!-- Categories will be loaded dynamically -->
+                    </select>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Featured</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="products-table">
+                        <!-- Products will be loaded dynamically -->
+                    </tbody>
+                </table>
+                
+                <div class="pagination" id="products-pagination">
+                    <!-- Pagination will be added dynamically -->
+                </div>
+            </div>
+            
+            <!-- Categories Tab -->
+            <div class="admin-tab hidden" id="categories-tab">
+                <div class="tab-header">
+                    <h2>Categories</h2>
+                    <button id="add-category-btn" class="btn">Add New Category</button>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Products Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="categories-table">
+                        <!-- Categories will be loaded dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Orders Tab -->
+            <div class="admin-tab hidden" id="orders-tab">
+                <h2>Orders</h2>
+                
+                <div class="order-filters">
+                    <select id="order-status-filter">
+                        <option value="">All Statuses</option>
+                        <option value="pending">Pending</option>
+                        <option value="processing">Processing</option>
+                        <option value="shipped">Shipped</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                    <input type="date" id="order-date-filter">
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>User</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-table">
+                        <!-- Orders will be loaded dynamically -->
+                    </tbody>
+                </table>
+                
+                <div class="pagination" id="orders-pagination">
+                    <!-- Pagination will be added dynamically -->
+                </div>
+            </div>
+            
+            <!-- Users Tab -->
+            <div class="admin-tab hidden" id="users-tab">
+                <h2>Users</h2>
+                
+                <div class="user-search">
+                    <input type="text" id="user-search" placeholder="Search users...">
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Registered</th>
+                            <th>Orders</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table">
+                        <!-- Users will be loaded dynamically -->
+                    </tbody>
+                </table>
+                
+                <div class="pagination" id="users-pagination">
+                    <!-- Pagination will be added dynamically -->
+                </div>
+            </div>
+            
+            <!-- Newsletter Tab -->
+            <div class="admin-tab hidden" id="newsletter-tab">
+                <h2>Newsletter Subscribers</h2>
+                
+                <div class="newsletter-actions">
+                    <button id="export-subscribers" class="btn">Export Subscribers</button>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Subscription Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="newsletter-table">
+                        <!-- Newsletter subscribers will be loaded dynamically -->
+                    </tbody>
+                </table>
+                
+                <div class="pagination" id="newsletter-pagination">
+                    <!-- Pagination will be added dynamically -->
+                </div>
+            </div>
+            
+            <!-- Messages Tab -->
+            <div class="admin-tab hidden" id="messages-tab">
+                <h2>Contact Messages</h2>
+                
+                <div class="message-filters">
+                    <select id="message-subject-filter">
+                        <option value="">All Subjects</option>
+                        <option value="order">Order Inquiry</option>
+                        <option value="product">Product Information</option>
+                        <option value="return">Returns & Refunds</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>From</th>
+                            <th>Subject</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messages-table">
+                        <!-- Messages will be loaded dynamically -->
+                    </tbody>
+                </table>
+                
+                <div class="pagination" id="messages-pagination">
+                    <!-- Pagination will be added dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content large-modal">
+            <span class="close-modal">&times;</span>
+            <h2 id="product-modal-title">Add New Product</h2>
+            <form id="product-form">
+                <div class="form-group">
+                    <label for="product-name">Product Name</label>
+                    <input type="text" id="product-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-price">Price ($)</label>
+                    <input type="number" id="product-price" step="0.01" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="product-category">Category</label>
+                    <select id="product-category" required>
+                        <!-- Categories will be loaded dynamically -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="product-description">Description</label>
+                    <textarea id="product-description" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="product-image">Image</label>
+                    <input type="file" id="product-image" accept="image/*">
+                    <div id="product-image-preview" class="image-preview"></div>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="product-featured">
+                    <label for="product-featured">Featured Product</label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary close-modal-btn">Cancel</button>
+                    <button type="submit" class="btn" id="save-product-btn">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div class="modal" id="category-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 id="category-modal-title">Add New Category</h2>
+            <form id="category-form">
+                <div class="form-group">
+                    <label for="category-name">Category Name</label>
+                    <input type="text" id="category-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="category-description">Description</label>
+                    <textarea id="category-description" rows="3" required></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary close-modal-btn">Cancel</button>
+                    <button type="submit" class="btn" id="save-category-btn">Save Category</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Order Detail Modal -->
+    <div class="modal" id="order-detail-modal">
+        <div class="modal-content large-modal">
+            <span class="close-modal">&times;</span>
+            <h2>Order Details: <span id="order-detail-id"></span></h2>
+            <div class="order-info">
+                <div class="order-info-section">
+                    <h3>Customer Information</h3>
+                    <p><strong>Name:</strong> <span id="order-customer-name"></span></p>
+                    <p><strong>Email:</strong> <span id="order-customer-email"></span></p>
+                    <p><strong>Address:</strong> <span id="order-customer-address"></span></p>
+                </div>
+                <div class="order-info-section">
+                    <h3>Order Information</h3>
+                    <p><strong>Date:</strong> <span id="order-date"></span></p>
+                    <p><strong>Status:</strong> 
+                        <select id="order-status">
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="shipped">Shipped</option>
+                            <option value="delivered">Delivered</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                        <button id="update-order-status" class="btn btn-small">Update</button>
+                    </p>
+                </div>
+            </div>
+            <h3>Order Items</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="order-items">
+                    <!-- Order items will be loaded dynamically -->
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" class="text-right"><strong>Total:</strong></td>
+                        <td id="order-total">$0.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!-- Message Detail Modal -->
+    <div class="modal" id="message-detail-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Message Details</h2>
+            <div class="message-info">
+                <p><strong>From:</strong> <span id="message-from"></span></p>
+                <p><strong>Email:</strong> <span id="message-email"></span></p>
+                <p><strong>Subject:</strong> <span id="message-subject"></span></p>
+                <p><strong>Date:</strong> <span id="message-date"></span></p>
+                <div class="message-content">
+                    <h3>Message:</h3>
+                    <p id="message-content"></p>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary close-modal-btn">Close</button>
+                <button type="button" class="btn" id="delete-message-btn">Delete Message</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-storage-compat.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/firebase-init.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

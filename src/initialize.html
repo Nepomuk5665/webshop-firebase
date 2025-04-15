@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopFire - Database Initializer</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .initializer-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .initializer-container h1 {
+            color: #4a6fa5;
+            margin-bottom: 20px;
+        }
+        
+        .initializer-container p {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .warning {
+            color: #dc3545;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .instructions {
+            text-align: left;
+            margin-bottom: 30px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        #seed-button {
+            font-size: 18px;
+            padding: 12px 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="initializer-container">
+        <h1>ShopFire Database Initializer</h1>
+        
+        <p class="warning">WARNING: This page is for initial setup only! Running this multiple times will create duplicate data.</p>
+        
+        <div class="instructions">
+            <h2>Before proceeding:</h2>
+            <ol>
+                <li>Ensure you've set up your Firebase project in the Firebase console</li>
+                <li>Update the Firebase configuration in <code>src/js/firebase-config.js</code> with your project details</li>
+                <li>Enable Email/Password authentication in the Firebase Authentication section</li>
+                <li>Create Firestore database in test mode</li>
+                <li>Set up Firebase Storage</li>
+            </ol>
+        </div>
+        
+        <p>Click the button below to initialize your database with sample categories, products, and an admin user (admin@shopfire.com / Admin123!).</p>
+        
+        <button id="seed-button" class="btn">Initialize Database</button>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.6.0/firebase-storage-compat.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/firebase-init.js"></script>
+    <script src="js/seed-data.js"></script>
+    <script>
+        // Check Firebase Authentication status and show appropriate error messages
+        document.addEventListener('DOMContentLoaded', () => {
+            const errorDisplay = document.createElement('div');
+            errorDisplay.style.color = '#dc3545';
+            errorDisplay.style.marginTop = '20px';
+            errorDisplay.style.fontWeight = 'bold';
+            
+            const seedButton = document.getElementById('seed-button');
+            if (seedButton) {
+                seedButton.after(errorDisplay);
+            }
+            
+            // Check if Firebase is properly initialized
+            if (!window.db || !window.auth) {
+                errorDisplay.textContent = "Firebase is not properly initialized. Please check the console for errors.";
+                return;
+            }
+            
+            // Check if Firebase Auth is properly initialized
+            auth.onAuthStateChanged(
+                (user) => {
+                    console.log("Auth state changed:", user ? "User logged in" : "No user");
+                    errorDisplay.textContent = "";
+                },
+                (error) => {
+                    console.error("Auth error:", error);
+                    errorDisplay.textContent = `Authentication Error: ${error.code} - ${error.message}`;
+                    errorDisplay.innerHTML += "<br>Please make sure Firebase Authentication is enabled in your Firebase console.";
+                }
+            );
+        });
+    </script>
+</body>
+</html>
