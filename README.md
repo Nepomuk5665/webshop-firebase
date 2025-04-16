@@ -35,8 +35,8 @@ ShopFire is a complete e-commerce webshop built using HTML, CSS, and JavaScript 
 
 1. Clone this repository:
 ```
-git clone https://github.com/yourusername/ShopFire.git
-cd ShopFire
+git clone https://github.com/Nepomuk5665/webshop-firebase.git
+cd webshop-firebase
 ```
 
 2. Create a new Firebase project:
@@ -66,7 +66,7 @@ firebase deploy
 ```
 
 7. Initialize the database:
-   - Navigate to `https://<your-project-id>.web.app/firestore-setup.html`
+   - Navigate to `https://webshop-5665.web.app/firestore-setup.html`
    - Follow the instructions on the page to seed the database with sample data
    - This will create sample categories, products, and an admin user (admin@shopfire.com / Admin123!)
 
